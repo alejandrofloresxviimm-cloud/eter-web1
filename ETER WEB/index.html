@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ETER — Training apparel designed to transcend. Beyond the limit.">
+<title>ETER — Transcend</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Favicon: ETER emblem (white on transparent) -->
+<link rel="icon" type="image/png" href="logo-emblem-white.png">
+
+<style>
+/* ============================================
+   ETER — DESIGN SYSTEM
+   ============================================ */
+:root {
+  --bg:            #000000;
+  --bg-elev:       #0a0a0a;
+  --bg-card:       #111111;
+  --ink:           #ffffff;
+  --ink-muted:     rgba(255,255,255,0.55);
+  --ink-dim:       rgba(255,255,255,0.35);
+  --line:          rgba(255,255,255,0.08);
+  --line-strong:   rgba(255,255,255,0.18);
+  --accent:        #e8e8e8;
+  --platinum:      #c7c7cc;
+  --easing:        cubic-bezier(0.16, 1, 0.3, 1);
+  --easing-soft:   cubic-bezier(0.25, 0.1, 0.25, 1);
+  --nav-h:         72px;
+  --radius:        2px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg);
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  overflow-x: hidden;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.011em;
+}
+
+::selection { background: var(--ink); color: var(--bg); }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
+
+/* Grain/noise overlay — adds premium filmic feel */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+.display {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+
+h1.hero-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: clamp(4.5rem, 16vw, 18rem);
+  letter-spacing: -0.06em;
+  line-height: 0.85;
+}
+
+.hero-logo-lockup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  animation: fadeUp 1.8s var(--easing) 0.4s forwards;
+}
+
+.hero-logo-img {
+  width: clamp(105px, 13.5vw, 195px);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 12px 40px rgba(255,255,255,0.08));
+  animation: emblemFloat 8s ease-in-out infinite;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@keyframes emblemFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+h2.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+
+.mono {
+  font-family: 'Space Grotesk', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-h);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  transition: background 0.6s var(--easing), backdrop-filter 0.6s var(--easing), border-color 0.6s;
+  border-bottom: 1px solid transparent;
+}
+
+.nav.scrolled {
+  background: rgba(0,0,0,0.72);
+  backdrop-filter: saturate(180%) blur(24px);
+  -webkit-backdrop-filter: saturate(180%) blur(24px);
+  border-bottom-color: var(--line);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  position: relative;
+  transition: opacity 0.4s var(--easing);
+}
+
+.nav-logo:hover { opacity: 0.82; }
+
+.nav-wordmark {
+  height: 22px;
+  width: auto;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Accessibility helper */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: translateY(-50%) scale(0.8); }
+  50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.84rem;
+  font-weight: 400;
+  opacity: 0.78;
+  transition: opacity 0.3s, letter-spacing 0.3s;
+  letter-spacing: 0;
+}
+
+.nav-links a:hover { opacity: 1; letter-spacing: 0.02em; }
+
+.nav-actions { display: flex; gap: 1.5rem; align-items: center; }
+
+.nav-btn {
+  background: none;
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  padding: 0.55rem 1.1rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.4s var(--easing);
+  font-family: inherit;
+  border-radius: var(--radius);
+}
+
+.nav-btn:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+.cart-icon {
+  width: 20px;
+  height: 20px;
+  stroke: var(--ink);
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.3s;
+}
+.cart-icon:hover { opacity: 1; }
+
+/* ============================================
+   HERO — CINEMATIC FULLSCREEN
+   ============================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 0 2rem;
+}
+
+/* Canvas for animated ether/fog background */
+#ether-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Gradient vignette over canvas */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 75%, rgba(0,0,0,1) 100%),
+    linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 20%, transparent 70%, rgba(0,0,0,0.95) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 1400px;
+  width: 100%;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 1.2s var(--easing) 0.3s forwards;
+}
+
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: "";
+  width: 40px;
+  height: 1px;
+  background: var(--ink-dim);
+}
+
+h1.hero-title {
+  display: block;
+  background: linear-gradient(180deg, #ffffff 0%, #e8e8e8 50%, #a0a0a0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 20px 80px rgba(255,255,255,0.08));
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  color: var(--ink-muted);
+  margin-top: 2rem;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 300;
+  line-height: 1.55;
+  opacity: 0;
+  animation: fadeUp 1.2s var(--easing) 0.9s forwards;
+}
+
+.hero-cta-row {
+  margin-top: 3.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeUp 1.2s var(--easing) 1.15s forwards;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 2rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  transition: all 0.5s var(--easing);
+  font-family: inherit;
+  background: none;
+  color: inherit;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(255,255,255,0.15);
+}
+
+.btn-ghost {
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.btn-ghost:hover {
+  border-color: var(--ink);
+  background: rgba(255,255,255,0.05);
+}
+
+.btn svg { width: 16px; height: 16px; transition: transform 0.4s var(--easing); }
+.btn:hover svg { transform: translateX(4px); }
+
+/* Scroll indicator */
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  opacity: 0;
+  animation: fadeIn 1s ease 2s forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.scroll-hint span {
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--ink-dim));
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-line::after {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(to bottom, transparent, var(--ink));
+  animation: scrollDown 2.2s ease-in-out infinite;
+}
+
+@keyframes scrollDown {
+  0% { top: -40%; }
+  100% { top: 100%; }
+}
+
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* ============================================
+   MARQUEE — infinite running text
+   ============================================ */
+.marquee {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 1.75rem 0;
+  background: var(--bg);
+  position: relative;
+  z-index: 3;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 4rem;
+  animation: marquee 40s linear infinite;
+  white-space: nowrap;
+  width: max-content;
+}
+
+.marquee-item {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.marquee-item.outline {
+  -webkit-text-stroke: 1px var(--ink);
+  color: transparent;
+}
+
+.marquee-dot {
+  align-self: center;
+  width: 8px;
+  height: 8px;
+  background: var(--ink);
+  border-radius: 50%;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================
+   SECTIONS — generic
+   ============================================ */
+section {
+  position: relative;
+  padding: 10rem 2.5rem;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 5rem;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.section-head-copy { max-width: 640px; }
+.section-head .eyebrow { margin-bottom: 1.25rem; display: block; }
+.section-head-desc { color: var(--ink-muted); font-size: 1rem; max-width: 380px; line-height: 1.65; }
+
+/* Reveal-on-scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1.2s var(--easing), transform 1.2s var(--easing);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s var(--easing), transform 1s var(--easing);
+}
+.reveal-stagger.visible > * { opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.15s; }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.25s; }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.35s; }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.45s; }
+.reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.55s; }
+
+/* ============================================
+   MANIFESTO SECTION
+   ============================================ */
+.manifesto {
+  padding: 14rem 2.5rem;
+  background: var(--bg);
+  position: relative;
+}
+
+.manifesto-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2rem, 5.5vw, 5rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  max-width: 1200px;
+}
+
+.manifesto-text .word {
+  display: inline-block;
+  opacity: 0.15;
+  transition: opacity 0.6s var(--easing);
+  margin-right: 0.12em;
+}
+
+.manifesto-text .word.lit { opacity: 1; }
+
+.manifesto-text .accent {
+  font-style: italic;
+  color: var(--platinum);
+  font-family: 'Space Grotesk', serif;
+}
+
+/* ============================================
+   3D PRODUCT SHOWCASE
+   ============================================ */
+.showcase {
+  padding: 8rem 2.5rem 12rem;
+  perspective: 1600px;
+}
+
+.showcase-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  min-height: 90vh;
+}
+
+.showcase-visual {
+  position: sticky;
+  top: calc(var(--nav-h) + 4rem);
+  aspect-ratio: 4/5;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.08) 0%, transparent 60%),
+    linear-gradient(135deg, #1a1a1a 0%, #050505 100%);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.8s var(--easing);
+}
+
+.showcase-visual::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.04), transparent 30%);
+  animation: spin 18s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.product-mockup {
+  position: relative;
+  z-index: 2;
+  width: 70%;
+  aspect-ratio: 3/4;
+  background: linear-gradient(180deg, #2a2a2a 0%, #0d0d0d 100%);
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 100px rgba(255,255,255,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  transform: rotateY(-8deg) rotateX(4deg);
+  transition: transform 0.6s var(--easing);
+}
+
+.product-mockup::after {
+  content: "IMAGEN DE PRODUCTO";
+  color: var(--ink-dim);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.showcase-info h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+
+.showcase-info p {
+  color: var(--ink-muted);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  max-width: 440px;
+  margin-bottom: 2.5rem;
+}
+
+.spec-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 3rem; }
+.spec-list li { display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--line); font-size: 0.9rem; }
+.spec-list .spec-label { color: var(--ink-muted); letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.74rem; }
+.spec-list .spec-value { color: var(--ink); font-family: 'Space Grotesk', monospace; }
+
+/* ============================================
+   COLLECTION GRID
+   ============================================ */
+.collection {
+  padding: 10rem 2.5rem;
+  background: var(--bg);
+}
+
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.product-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.6s var(--easing), border-color 0.4s;
+}
+
+.product-card:hover { transform: translateY(-6px); border-color: var(--line-strong); }
+
+.product-card-image {
+  position: relative;
+  aspect-ratio: 4/5;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #181818 0%, #080808 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.product-card-image::before {
+  content: "[ ESPACIO PARA IMAGEN ]";
+  color: var(--ink-dim);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.product-card-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 0.64rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+}
+
+.product-card-info {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.product-card-info h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.3rem;
+}
+
+.product-card-info .category {
+  font-size: 0.72rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.product-card-info .price {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Quick shop hover */
+.product-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.25rem;
+  background: linear-gradient(0deg, rgba(0,0,0,0.85), transparent);
+  transform: translateY(100%);
+  transition: transform 0.5s var(--easing);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 3;
+}
+
+.product-card:hover .product-card-overlay { transform: translateY(0); }
+
+.size-chip {
+  flex: 1;
+  text-align: center;
+  padding: 0.55rem;
+  font-size: 0.72rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  letter-spacing: 0.08em;
+  transition: all 0.3s;
+}
+.size-chip:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+/* ============================================
+   TECHNOLOGY SECTION
+   ============================================ */
+.technology {
+  padding: 12rem 2.5rem;
+  background: linear-gradient(180deg, #000 0%, #050505 50%, #000 100%);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.tech-card {
+  padding: 2.5rem;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: rgba(255,255,255,0.015);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.6s var(--easing);
+}
+
+.tech-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ink), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.8s var(--easing);
+}
+
+.tech-card:hover { background: rgba(255,255,255,0.035); transform: translateY(-4px); }
+.tech-card:hover::before { transform: translateX(100%); }
+
+.tech-num {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.8rem;
+  color: var(--ink-dim);
+  letter-spacing: 0.2em;
+  margin-bottom: 3rem;
+  display: block;
+}
+
+.tech-card h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  line-height: 1.15;
+}
+
+.tech-card p { color: var(--ink-muted); font-size: 0.95rem; line-height: 1.6; }
+
+/* ============================================
+   CINEMATIC CTA
+   ============================================ */
+.cinematic {
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.cinematic-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 50%, rgba(200,200,200,0.15), transparent 40%),
+    radial-gradient(circle at 70% 50%, rgba(100,100,100,0.12), transparent 40%),
+    #000;
+  filter: blur(40px);
+}
+
+.cinematic-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  padding: 0 2rem;
+}
+
+.cinematic h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(3rem, 9vw, 8rem);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+  margin-bottom: 2rem;
+}
+
+.cinematic h2 em {
+  font-style: italic;
+  color: var(--platinum);
+  font-weight: 300;
+}
+
+.cinematic p {
+  font-size: 1.1rem;
+  color: var(--ink-muted);
+  max-width: 540px;
+  margin: 0 auto 3rem;
+  line-height: 1.65;
+}
+
+/* ============================================
+   NEWSLETTER
+   ============================================ */
+.newsletter {
+  padding: 10rem 2.5rem;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+
+.newsletter h2 { margin-bottom: 1.5rem; }
+.newsletter p { color: var(--ink-muted); max-width: 500px; margin: 0 auto 3rem; font-size: 1.05rem; line-height: 1.6; }
+
+.newsletter-form {
+  display: flex;
+  max-width: 540px;
+  margin: 0 auto;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.newsletter-form:focus-within { border-color: var(--ink); }
+
+.newsletter-form input {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--ink);
+  padding: 1.2rem 1.5rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  letter-spacing: 0.01em;
+}
+
+.newsletter-form input::placeholder { color: var(--ink-dim); }
+
+.newsletter-form button {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  padding: 0 2rem;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.newsletter-form button:hover { background: var(--platinum); }
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer {
+  background: var(--bg);
+  padding: 6rem 2.5rem 2.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.footer-mega {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding: 0 2rem;
+  user-select: none;
+}
+
+.footer-mega img {
+  width: 100%;
+  max-width: 1400px;
+  height: auto;
+  opacity: 0.92;
+  display: block;
+  margin: 0 auto;
+  -webkit-user-drag: none;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: 3rem;
+  padding-top: 4rem;
+  border-top: 1px solid var(--line);
+}
+
+.footer-col h5 {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--ink-muted);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+.footer-col a { color: var(--ink); text-decoration: none; font-size: 0.9rem; opacity: 0.75; transition: opacity 0.3s; }
+.footer-col a:hover { opacity: 1; }
+
+.footer-col p { color: var(--ink-muted); font-size: 0.85rem; line-height: 1.6; max-width: 320px; }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.78rem;
+  color: var(--ink-dim);
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  .showcase-stage { grid-template-columns: 1fr; gap: 4rem; }
+  .showcase-visual { position: relative; top: 0; }
+  .collection-grid { grid-template-columns: repeat(2, 1fr); }
+  .tech-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .nav { padding: 0 1.25rem; }
+  .nav-links { display: none; }
+  section { padding: 6rem 1.25rem; }
+  .manifesto, .technology, .collection, .newsletter { padding: 6rem 1.25rem; }
+  .collection-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .section-head { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .footer-bottom { flex-direction: column; gap: 1rem; }
+}
+
+/* Respect motion prefs */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     NAVIGATION
+     ============================================ -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo" aria-label="ETER — inicio">
+    <img src="logo-white.png" alt="ETER" class="nav-wordmark">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#colecciones">Collections</a></li>
+    <li><a href="#tecnologia">Technology</a></li>
+    <li><a href="#manifesto">Manifesto</a></li>
+    <li><a href="#lookbook">Lookbook</a></li>
+    <li><a href="#contacto">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-btn">Sign In</button>
+    <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+    </svg>
+  </div>
+</nav>
+
+<!-- ============================================
+     HERO — CINEMATIC FULLSCREEN
+     ============================================ -->
+<section class="hero">
+  <canvas id="ether-canvas"></canvas>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow eyebrow">Genesis Collection · Drop 001</div>
+    <div class="hero-logo-lockup">
+      <img src="logo-full-white.png" alt="ETER" class="hero-logo-img">
+      <h1 class="visually-hidden">ETER</h1>
+    </div>
+    <p class="hero-subtitle">
+      Training apparel designed to transcend the limit.
+      Forged in the void. Tested at the edge.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#colecciones" class="btn btn-primary">
+        View Collection
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#manifesto" class="btn btn-ghost">Manifesto</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ============================================
+     MARQUEE
+     ============================================ -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="marquee-item">Beyond the limit</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item outline">Transcend</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">Forged in the void</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item outline">The fifth essence</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">Beyond the limit</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item outline">Transcend</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item">Forged in the void</span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item outline">The fifth essence</span>
+    <span class="marquee-dot"></span>
+  </div>
+</div>
+
+<!-- ============================================
+     MANIFESTO
+     ============================================ -->
+<section class="manifesto" id="manifesto">
+  <div class="container">
+    <span class="eyebrow" style="display:block; margin-bottom:3rem;">— Manifesto</span>
+    <p class="manifesto-text" id="manifesto-text">
+      We don't design clothes. We design <span class="accent">tools</span> for those who understand the body is the first frontier. Every seam is an oath. Every gram, a decision. ETER is not a brand — it's a <span class="accent">signal</span> for those who pursue the impossible in silence.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================
+     3D PRODUCT SHOWCASE
+     ============================================ -->
+<section class="showcase" id="colecciones">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-head-copy">
+        <span class="eyebrow">01 — Featured Product</span>
+        <h2 class="section-title">Phantom<br>Performance.</h2>
+      </div>
+      <p class="section-head-desc">
+        Second-generation technical fabric. Absolute breathability,
+        residual weight, surgical fit. The starting point.
+      </p>
+    </div>
+
+    <div class="showcase-stage">
+      <div class="showcase-visual" id="showcase-visual">
+        <div class="product-mockup" id="product-mockup"></div>
+      </div>
+
+      <div class="showcase-info">
+        <h3>[ Product Name ]</h3>
+        <p>
+          Product description — the story of the fabric,
+          the philosophy behind the cut, and why this garment exists goes here.
+        </p>
+
+        <ul class="spec-list">
+          <li><span class="spec-label">Material</span><span class="spec-value">[ composition ]</span></li>
+          <li><span class="spec-label">Weight</span><span class="spec-value">[ grams ]</span></li>
+          <li><span class="spec-label">Fit</span><span class="spec-value">[ fit ]</span></li>
+          <li><span class="spec-label">Origin</span><span class="spec-value">[ location ]</span></li>
+          <li><span class="spec-label">Colors</span><span class="spec-value">[ palette ]</span></li>
+        </ul>
+
+        <a href="#" class="btn btn-primary">
+          Buy — $[ price ]
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     COLLECTION GRID
+     ============================================ -->
+<section class="collection">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-head-copy">
+        <span class="eyebrow">02 — Genesis Collection</span>
+        <h2 class="section-title">Drop 001.</h2>
+      </div>
+      <p class="section-head-desc">
+        Six garments. Limited production. One single statement.
+      </p>
+    </div>
+
+    <div class="collection-grid reveal-stagger">
+      <!-- Product 1 -->
+      <article class="product-card">
+        <div class="product-card-image">
+          <span class="product-card-badge">New</span>
+        </div>
+        <div class="product-card-overlay">
+          <div class="size-chip">S</div>
+          <div class="size-chip">M</div>
+          <div class="size-chip">L</div>
+          <div class="size-chip">XL</div>
+        </div>
+        <div class="product-card-info">
+          <div>
+            <h4>[ Product 01 ]</h4>
+            <span class="category">Top · Training</span>
+          </div>
+          <span class="price">$—</span>
+        </div>
+      </article>
+
+      <!-- Product 2 -->
+      <article class="product-card">
+        <div class="product-card-image">
+          <span class="product-card-badge">Limited</span>
+        </div>
+        <div class="product-card-overlay">
+          <div class="size-chip">S</div>
+          <div class="size-chip">M</div>
+          <div class="size-chip">L</div>
+          <div class="size-chip">XL</div>
+        </div>
+        <div class="product-card-info">
+          <div>
+            <h4>[ Product 02 ]</h4>
+            <span class="category">Bottom · Compression</span>
+          </div>
+          <span class="price">$—</span>
+        </div>
+      </article>
+
+      <!-- Product 3 -->
+      <article class="product-card">
+        <div class="product-card-image">
+          <span class="product-card-badge">Genesis</span>
+        </div>
+        <div class="product-card-overlay">
+          <div class="size-chip">S</div>
+          <div class="size-chip">M</div>
+          <div class="size-chip">L</div>
+          <div class="size-chip">XL</div>
+        </div>
+        <div class="product-card-info">
+          <div>
+            <h4>[ Product 03 ]</h4>
+            <span class="category">Outerwear</span>
+          </div>
+          <span class="price">$—</span>
+        </div>
+      </article>
+
+      <!-- Product 4 -->
+      <article class="product-card">
+        <div class="product-card-image">
+          <span class="product-card-badge">Unisex</span>
+        </div>
+        <div class="product-card-overlay">
+          <div class="size-chip">S</div>
+          <div class="size-chip">M</div>
+          <div class="size-chip">L</div>
+          <div class="size-chip">XL</div>
+        </div>
+        <div class="product-card-info">
+          <div>
+            <h4>[ Product 04 ]</h4>
+            <span class="category">Accessory</span>
+          </div>
+          <span class="price">$—</span>
+        </div>
+      </article>
+
+      <!-- Product 5 -->
+      <article class="product-card">
+        <div class="product-card-image">
+          <span class="product-card-badge">Core</span>
+        </div>
+        <div class="product-card-overlay">
+          <div class="size-chip">S</div>
+          <div class="size-chip">M</div>
+          <div class="size-chip">L</div>
+          <div class="size-chip">XL</div>
+        </div>
+        <div class="product-card-info">
+          <div>
+            <h4>[ Product 05 ]</h4>
+            <span class="category">Top · Oversized</span>
+          </div>
+          <span class="price">$—</span>
+        </div>
+      </article>
+
+      <!-- Product 6 -->
+      <article class="product-card">
+        <div class="product-card-image">
+          <span class="product-card-badge">Drop 001</span>
+        </div>
+        <div class="product-card-overlay">
+          <div class="size-chip">S</div>
+          <div class="size-chip">M</div>
+          <div class="size-chip">L</div>
+          <div class="size-chip">XL</div>
+        </div>
+        <div class="product-card-info">
+          <div>
+            <h4>[ Product 06 ]</h4>
+            <span class="category">Performance</span>
+          </div>
+          <span class="price">$—</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     TECHNOLOGY
+     ============================================ -->
+<section class="technology" id="tecnologia">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-head-copy">
+        <span class="eyebrow">03 — Engineering</span>
+        <h2 class="section-title">No compromises.</h2>
+      </div>
+      <p class="section-head-desc">
+        Every material and cut decision answers to one principle:
+        the garment must disappear during effort.
+      </p>
+    </div>
+
+    <div class="tech-grid reveal-stagger">
+      <div class="tech-card">
+        <span class="tech-num">/ 001</span>
+        <h4>AEON™ Fabric</h4>
+        <p>
+          Variable-density microfiber with directional ventilation
+          channels. Dries four times faster than standard technical cotton.
+        </p>
+      </div>
+
+      <div class="tech-card">
+        <span class="tech-num">/ 002</span>
+        <h4>Weightless Construction</h4>
+        <p>
+          Seams sealed by ultrasound. Zero friction, zero added weight.
+          The garment disappears.
+        </p>
+      </div>
+
+      <div class="tech-card">
+        <span class="tech-num">/ 003</span>
+        <h4>Anatomical Architecture</h4>
+        <p>
+          Patterns developed on 3D scans of real athletes.
+          The cut follows the muscle, not the silhouette.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CINEMATIC CTA
+     ============================================ -->
+<section class="cinematic" id="lookbook">
+  <div class="cinematic-bg"></div>
+  <div class="cinematic-content">
+    <h2>You don't train to <em>fit in.</em><br>You train to <em>surpass.</em></h2>
+    <p>
+      The complete lookbook for the Genesis Collection is coming soon.
+      Be the first to get access.
+    </p>
+    <a href="#newsletter" class="btn btn-ghost">
+      Early Access
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================
+     NEWSLETTER
+     ============================================ -->
+<section class="newsletter" id="newsletter">
+  <div class="container">
+    <span class="eyebrow" style="display:block; margin-bottom:2rem;">— Subscribe</span>
+    <h2 class="section-title">Access before anyone.</h2>
+    <p>
+      Limited drops. Early access. No noise, only signal.
+      We never share your email.
+    </p>
+    <form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='✓ Subscribed';">
+      <input type="email" placeholder="you@email.com" required>
+      <button type="submit">Join</button>
+    </form>
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer id="contacto">
+  <div class="container">
+    <div class="footer-mega">
+      <img src="logo-white.png" alt="ETER">
+    </div>
+
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h5>ETER</h5>
+        <p>
+          Training apparel designed to transcend.
+          Made for those who don't ask permission.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h5>Shop</h5>
+        <ul>
+          <li><a href="#">Men</a></li>
+          <li><a href="#">Women</a></li>
+          <li><a href="#">Accessories</a></li>
+          <li><a href="#">Drop 001</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">Story</a></li>
+          <li><a href="#">Technology</a></li>
+          <li><a href="#">Athletes</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Support</h5>
+        <ul>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Sizing</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Social</h5>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">TikTok</a></li>
+          <li><a href="#">YouTube</a></li>
+          <li><a href="#">X</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 ETER. All rights reserved.</span>
+      <span>Designed to transcend.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================
+   ETER — INTERACTION SYSTEM
+   ============================================ */
+
+/* ------- 1. Sticky nav shadow on scroll ------- */
+const nav = document.getElementById('nav');
+const onScroll = () => {
+  if (window.scrollY > 40) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+};
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+/* ------- 2. Reveal on scroll (IntersectionObserver) ------- */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => io.observe(el));
+
+/* ------- 3. Manifesto word-by-word reveal ------- */
+const manifesto = document.getElementById('manifesto-text');
+if (manifesto) {
+  // Wrap each word in a span (preserving inner tags)
+  const walkAndWrap = (node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const frag = document.createDocumentFragment();
+      const parts = node.textContent.split(/(\s+)/);
+      parts.forEach(p => {
+        if (p.trim() === '') {
+          frag.appendChild(document.createTextNode(p));
+        } else {
+          const s = document.createElement('span');
+          s.className = 'word';
+          s.textContent = p;
+          frag.appendChild(s);
+        }
+      });
+      node.parentNode.replaceChild(frag, node);
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      Array.from(node.childNodes).forEach(walkAndWrap);
+    }
+  };
+  walkAndWrap(manifesto);
+
+  const words = manifesto.querySelectorAll('.word');
+  const manifestoIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        words.forEach((w, i) => {
+          setTimeout(() => w.classList.add('lit'), i * 55);
+        });
+        manifestoIO.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  manifestoIO.observe(manifesto);
+}
+
+/* ------- 4. 3D product mockup mouse tilt ------- */
+const visual = document.getElementById('showcase-visual');
+const mockup = document.getElementById('product-mockup');
+if (visual && mockup) {
+  visual.addEventListener('mousemove', (e) => {
+    const rect = visual.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    const rotY = x * 20;
+    const rotX = -y * 14;
+    mockup.style.transform = `rotateY(${rotY}deg) rotateX(${rotX}deg) translateZ(30px)`;
+  });
+  visual.addEventListener('mouseleave', () => {
+    mockup.style.transform = 'rotateY(-8deg) rotateX(4deg)';
+  });
+}
+
+/* ------- 5. ETHER CANVAS — animated cosmic fog ------- */
+(() => {
+  const canvas = document.getElementById('ether-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d', { alpha: true });
+  let W, H, dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  const particles = [];
+  const PARTICLE_COUNT = 80;
+
+  const resize = () => {
+    W = canvas.width = window.innerWidth * dpr;
+    H = canvas.height = window.innerHeight * dpr;
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+  };
+
+  const init = () => {
+    particles.length = 0;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: (Math.random() * 180 + 80) * dpr,
+        vx: (Math.random() - 0.5) * 0.18 * dpr,
+        vy: (Math.random() - 0.5) * 0.18 * dpr,
+        a: Math.random() * 0.06 + 0.015,
+        hue: Math.random() * 60 + 200,
+      });
+    }
+  };
+
+  let mouseX = 0, mouseY = 0;
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX * dpr;
+    mouseY = e.clientY * dpr;
+  });
+
+  const draw = () => {
+    // Fade previous frame (smoky trail)
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+    ctx.fillRect(0, 0, W, H);
+
+    particles.forEach(p => {
+      // Mouse attraction (subtle)
+      const dx = mouseX - p.x;
+      const dy = mouseY - p.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 400 * dpr) {
+        p.vx += (dx / dist) * 0.02;
+        p.vy += (dy / dist) * 0.02;
+      }
+
+      // Damping
+      p.vx *= 0.985;
+      p.vy *= 0.985;
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Wrap
+      if (p.x < -p.r) p.x = W + p.r;
+      if (p.x > W + p.r) p.x = -p.r;
+      if (p.y < -p.r) p.y = H + p.r;
+      if (p.y > H + p.r) p.y = -p.r;
+
+      // Draw soft blob
+      const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+      gradient.addColorStop(0, `hsla(${p.hue}, 20%, 70%, ${p.a})`);
+      gradient.addColorStop(0.5, `hsla(${p.hue}, 15%, 50%, ${p.a * 0.4})`);
+      gradient.addColorStop(1, 'hsla(220, 20%, 20%, 0)');
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  };
+
+  resize();
+  init();
+  draw();
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { resize(); init(); }, 200);
+  });
+})();
+
+/* ------- 6. Parallax hero title on scroll ------- */
+const heroTitle = document.querySelector('.hero-title');
+const heroSubtitle = document.querySelector('.hero-subtitle');
+if (heroTitle) {
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y < window.innerHeight) {
+      heroTitle.style.transform = `translateY(${y * 0.3}px)`;
+      heroTitle.style.opacity = Math.max(0, 1 - y / (window.innerHeight * 0.7));
+      if (heroSubtitle) heroSubtitle.style.transform = `translateY(${y * 0.15}px)`;
+    }
+  }, { passive: true });
+}
+
+/* ------- 7. Smooth scroll for nav links ------- */
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
